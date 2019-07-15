@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+<script src="autobahn.js"></script>
+
+
+</head>
+<body>
+    
+    <form action="post.php" method="post">
+        
+        <button type="submit">Send</button>
+
+    </form>
+    
+</body>
+
+<script>
+    var conn = new ab.Session('ws://localhost:8080',
+        function() {
+            conn.subscribe('notifications', function(topic, data) {
+
+                console.log(data);
+            });
+        },
+        function() {
+            console.warn('WebSocket connection closed');
+        },
+        {'skipSubprotocolCheck': true}
+    );
+
+    
+</script>
+</html>
